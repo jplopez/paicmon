@@ -34,8 +34,10 @@ function get(table,value)
   return nil
 end
 
-function one_of(table, value)
-  return get(table,value)~=nil
+function one_of(value, ...)
+  if(select("#",...)==0)return false
+  for arg in all({...})do if(value==arg)return true end
+  return false
 end
 
 function muted()return(stat(48)-stat(49)==0)end

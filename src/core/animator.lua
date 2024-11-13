@@ -12,10 +12,9 @@ animator=class:extend({
 
   play_pause=function(_ENV)playing=not playing end,
   rewind=function(_ENV)cur=0 end,
-
   next_frame=function(_ENV) return start+cur end,
 
-  update=function(_ENV) 
+  update=function(_ENV,obj) 
     if(playing) then
       step+=1
       if(step%flr(fr/speed)==0)cur+=1
@@ -24,10 +23,12 @@ animator=class:extend({
         else playing=false end
       end
     end
+    if(obj.oldx<obj.x)flipx=true 
+    if(obj.oldx>obj.x)flipx=false
   end,
 
-  draw=function(_ENV,x,y) 
-    if(playing) spr(next_frame(_ENV),x,y,1,1,flipx,flipy)
+  draw=function(_ENV,obj) 
+    if(playing) spr(next_frame(_ENV),obj.x,obj.y,1,1,flipx,flipy)
   end,
 })
 

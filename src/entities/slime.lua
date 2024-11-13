@@ -10,21 +10,25 @@ slime=animated:extend({
     if(direction==down)y=mid(stage_y0,y+dy,stage_y1-8)
   end,
 
-  on_collision=function(_ENV,other,oldx,oldy) 
+  on_wall=function(_ENV)
     x,y=oldx,oldy
-    if(direction==left or direction==right)then direction=rnd({up,down})
-    elseif(direction==up or direction==down)then direction=rnd({left,right})end
+    if(one_of(direction, left, right))then direction=rnd({up,down})
+    elseif(one_of(direction,up,down))then direction=rnd({left,right})end
   end,
 })
 
+--map for the initial sprite of each slime
 slimes_anim_start={anemo=11, geo=32, electro=46, dendro=39, hydro=25, pyro=4, cryo=18,}
 
+-- @method new_slime(element [_x],[_y]) 
+-- creates a slime object of the 'element'
+-- @param element the type of slime: anemo, geo, electro, dendro, hydro, pyro or crio
+-- @param _x (optional) initial X pos
+-- @param _y (optional) initial y pos
 function new_slime(element,_x,_y)
-  _x=_x or 60
-  _y=_y or 56
   local spr_start=slimes_anim_start[element]
   return slime({
-    x=_x,y=_y,
+    x=(_x and _x or 60),y=(_y and _y or 56),
     anim = {
       [idle] = animator({ start=spr_start, frames=4, speed=4 }),
       [moving] = animator({ start=spr_start, frames=7, speed=6 }),

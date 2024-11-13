@@ -1,5 +1,6 @@
 animated=object:extend({
 	x=64, y=64,
+  oldx=64,oldy=64,
 	dx=0.3, dy=0.3,
 	state=idle,
   flx=false, --false=left
@@ -15,27 +16,15 @@ animated=object:extend({
 		y=mid(stage_y0,y,stage_y1-8)			
 	end,
 	
-	update=function(_ENV) 
-    local oldx,oldy=x,y
-    if(playable) input(_ENV)
-    detect(_ENV,stage,on_collision,oldx,oldy)
-    upd_anim(_ENV,oldx,oldy)
-	end,
-	
-	draw=function(_ENV) if(anim[state])anim[state]:draw(x,y)end,
-
-  on_collision=function(_ENV,other,oldx,oldy)x,y=oldx,oldy end,
-
-  upd_anim=function(_ENV,oldx,oldy)
-    if(oldx~=x or oldy~=y)then
-      state=moving
-      if(oldx<x)flx=true 
-      if(oldx>x)flx=false
-    else state=idle end
-
-    if(anim[state])then 
-      anim[state].flipx=flx
-      anim[state]:update()
+	update=function(_ENV)
+    if(state!=ghost) then 
+      oldx,oldy=x,y
+      if(playable) input(_ENV)
+      if(stage.collide(_ENV)) on_wall(_ENV)
+      state = (oldx~=x or oldy~=y) and moving or idle
     end
-  end,
+    if(anim[state])anim[state]:update(_ENV)
+	end,
+
+	draw=function(_ENV) if(anim[state])anim[state]:draw(_ENV)end,
 })

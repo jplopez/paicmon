@@ -12,14 +12,14 @@ class=setmetatable({
   init=_noop
 },{__index=_ENV})
 
--- adds life cycle, update/draw and state machine
+-- adds life cycle, update/draw, collision
 object=class:extend({
 	x=0,y=0,
-	-- class
 	pool={},
-
 	update=_noop,
 	draw=_noop,
+	tolerance=0,
+
 
 	extend=function(_ENV,tbl)tbl=class.extend(_ENV,tbl)tbl.pool={}return tbl	end,
 	each=function(_ENV,method,...)for e in all(pool)do if(e[method])e[method](e,...)end end,
@@ -28,8 +28,7 @@ object=class:extend({
 	--collisions
 	detect=function(_ENV,other,callback,...)if(collide(_ENV,other))callback(_ENV,other,...)end,
 	
-	collide=function(_ENV,other,tolerance)
-		tolerance=tolerance or tol
+	collide=function(_ENV,other)
 		if(other==stage) return stage.collide(_ENV,tolerance)
 		return x < other.x+8+tolerance
         and x+8 > other.x-tolerance
