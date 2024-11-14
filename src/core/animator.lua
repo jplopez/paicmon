@@ -31,4 +31,3 @@ animator=class:extend({
     if(playing) spr(next_frame(_ENV),obj.x,obj.y,1,1,flipx,flipy)
   end,
 })
-
