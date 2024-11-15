@@ -1,4 +1,4 @@
-paimon=animated:extend({
+melon=animated:extend({
 	x=60, y=72, state=moving,
   anim={
     [idle]  =animator({ start=74, frames=4, speed=3, }),
@@ -14,6 +14,13 @@ paimon=animated:extend({
     --fairy dust 
     foreach(dust,function(obj) if(obj.act>obj.life)del(dust,obj)obj:destroy() end)
     if(state==moving and #dust<max_dust)add(dust,fairy_dust({fr=5}))
+  end,
+
+  respawn=function(_ENV)
+    x=60
+    y=72
+    --state=idle
+    playable=true
   end,
 
   on_wall=function(_ENV) x,y=oldx,oldy end,

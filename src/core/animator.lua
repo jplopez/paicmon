@@ -14,7 +14,7 @@ animator=class:extend({
   rewind=function(_ENV)cur=0 end,
   next_frame=function(_ENV) return start+cur end,
 
-  update=function(_ENV,obj) 
+  update=function(_ENV,obj)
     if(playing) then
       step+=1
       if(step%flr(fr/speed)==0)cur+=1

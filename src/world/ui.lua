@@ -4,7 +4,7 @@ gui={
   score="0",
 
   update=function()
-    gui.lives=srep("♥",player['lives'])
+    gui.lives=srep("♥",player.lives)
     gui.lives_len=#gui.lives*4
     gui.score=lpad(player.score,6)
   end,
