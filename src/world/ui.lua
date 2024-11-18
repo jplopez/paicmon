@@ -10,8 +10,8 @@ gui={
   end,
 
   draw=function()
-    printo(gui.score,stage_x0+1,stage_y1+2,dark_teal,white)
-    printo(gui.lives,64-gui.lives_len,stage_y1+2,red,white)
-    print("🐱🐱🐱🐱",stage_x1-30,stage_y1+2,white)    
+    prto(gui.score,stage_x0+1,stage_y1+2,dark_teal,white,true)
+    prto(gui.lives,'c',stage_y1+2,red,white,true)
+    prto("🐱🐱🐱🐱",'r',stage_y1+2,yellow,orange,true)
   end,
 }

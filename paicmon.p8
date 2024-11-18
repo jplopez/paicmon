@@ -31,6 +31,7 @@ tol=1
 
 #include src/core/utils.lua
 #include src/core/print_utils.lua
+#include src/core/printo.lua
 #include src/core/oop.lua
 #include src/core/log.lua
 #include src/core/animator.lua
@@ -114,12 +115,6 @@ end
 -------------------
 -- draw functions
 -------------------
-function draw_ui()
-  printo(lpad(player.score,6),stage_x0+1,stage_y1+2,1,7)
-  local str=srep("♥",player['lives'])
-  printo(str,64-(#str*4),stage_y1+2,8,7)
-  print("🐱🐱🐱🐱",stage_x1-30,stage_y1+2,7)
-end
 
 __gfx__
 0000000000000000000000000000000000008a00000000000000000000000000000000000000a00000000a000000c30000000000000000000000000000000000
