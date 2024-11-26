@@ -1,9 +1,22 @@
+--[[
+  Animator object to encapsulate
+  animations based on sprites.
+  Based on the animation lib by Scathe (@clowerweb) distributed
+  in the Lib-Pico8 repo.
+
+  Animator is designed for programmers to only specify the values 
+  of non-function attributes and, if needed, override the 'next_frame'
+  function
+  
+  @requires : oop.lua
+  @authors : JP Lopez (@jplopez) and Scathe (@clowerweb)
+]]
 animator=class:extend({
   start=0,
   cur=0,
   step=1,
   frames=1,
-  fr=60, --frame rate DO NO EDIT
+  fr=60, --frame rate. Edit to 30 or 60 depending on your game fr
   speed=6,
   loop=true,
   playing=true,
